@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://clbefmwsjps28"]
+
+[ext_resource type="Texture2D" uid="uid://bbyoty0dpylmu" path="res://assets/terrain_stone_cloud_left.png" id="1_nlgqw"]
+[ext_resource type="Texture2D" uid="uid://4c5wnduusuur" path="res://assets/terrain_stone_cloud_right.png" id="2_507ja"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n1ckp"]
+size = Vector2(128, 52)
+
+[node name="Platform" type="AnimatableBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-33, 0)
+texture = ExtResource("1_nlgqw")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(31, 0)
+texture = ExtResource("2_507ja")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -6)
+shape = SubResource("RectangleShape2D_n1ckp")
+one_way_collision = true
