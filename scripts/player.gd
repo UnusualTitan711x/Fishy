@@ -4,6 +4,7 @@ class_name Player
 @export var SPEED = 300.0
 @export var JUMP_VELOCITY = 400.0
 @export var gravity_scale : float = 2
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var coins = 0
 
@@ -23,5 +24,18 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+	if direction > 0:
+		animated_sprite.flip_h = false
+	elif direction < 0:
+		animated_sprite.flip_h = true
+		
+	if is_on_floor():
+		if direction == 0:
+			animated_sprite.play("idle")
+		else:
+			animated_sprite.play("walk")
+	else:
+		animated_sprite.play("jump")
 
 	move_and_slide()

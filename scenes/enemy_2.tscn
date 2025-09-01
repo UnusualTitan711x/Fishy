@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://by3h3ep51ikdg"]
+
+[ext_resource type="Script" uid="uid://ckehct0n43275" path="res://scripts/enemy_2.gd" id="1_oh86k"]
+[ext_resource type="Texture2D" uid="uid://dk5yb5odjwi47" path="res://assets/spritesheet_fish.png" id="2_oh86k"]
+[ext_resource type="PackedScene" uid="uid://dl6mrjyhmja0x" path="res://scenes/killzone.tscn" id="3_k4auq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a4ywr"]
+atlas = ExtResource("2_oh86k")
+region = Rect2(448, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4auq"]
+atlas = ExtResource("2_oh86k")
+region = Rect2(448, 128, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fdqbe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a4ywr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k4auq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6nrqq"]
+radius = 24.0832
+
+[node name="Enemy2" type="Node2D"]
+script = ExtResource("1_oh86k")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_fdqbe")
+autoplay = "default"
+frame_progress = 0.340414
+
+[node name="Killzone" parent="." instance=ExtResource("3_k4auq")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(0, 7)
+shape = SubResource("CircleShape2D_6nrqq")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
