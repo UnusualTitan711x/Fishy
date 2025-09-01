@@ -5,6 +5,7 @@ class_name Player
 @export var JUMP_VELOCITY = 400.0
 @export var gravity_scale : float = 2
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var game_manager: Node = %GameManager
 
 var coins = 0
 
@@ -15,6 +16,7 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
+		game_manager.play_jump()
 		velocity.y -= JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
